@@ -1,0 +1,26 @@
+test = {}
+
+test.bar = function(actualValue,self,self)
+    print(self)
+    print actualValue
+end function
+
+test.bar("test", "ignore", "ignore as well")
+
+xxx = @test.bar
+
+xxx("bar", "do not ignore", "ignore")
+
+foo = {}
+
+foo.bar = function(was,self,self,last)
+    print(self)
+    print was
+    print last
+end function
+
+foo.bar("test", "ignore", "ignore as well", "show me")
+
+xxx = @foo.bar
+
+xxx("bar", "do not ignore", "ignore", "show me")
