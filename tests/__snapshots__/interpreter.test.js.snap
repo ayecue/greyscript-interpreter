@@ -118,7 +118,7 @@ exports[`interpreter default scripts deep-equal.src 6`] = `"0"`;
 
 exports[`interpreter default scripts deep-equal.src 7`] = `"\\"test\\""`;
 
-exports[`interpreter default scripts deep-equal.src 8`] = `"{\\"was\\":1,\\"second\\":2,{\\"was\\":1,\\"second\\":2,{\\"was\\":1,\\"second\\":2,{...}:{...}}:{\\"was\\":1,\\"second\\":2,{...}:{...}}}:{\\"was\\":1,\\"second\\":2,{\\"was\\":1,\\"second\\":2,{...}:{...}}:{\\"was\\":1,\\"second\\":2,{...}:{...}}}}"`;
+exports[`interpreter default scripts deep-equal.src 8`] = `"{\\"was\\":1,\\"second\\":2,{\\"foo\\":2}:{\\"was\\":1,\\"second\\":2,{\\"foo\\":2}:{\\"was\\":1,\\"second\\":2,{...}:{...}}}}"`;
 
 exports[`interpreter default scripts deep-equal.src 9`] = `"0"`;
 
@@ -152,7 +152,13 @@ exports[`interpreter default scripts envar.src 1`] = `"\\"123\\""`;
 
 exports[`interpreter default scripts exit.src 1`] = `"123"`;
 
+exports[`interpreter default scripts exit.src 2`] = `"\\"test\\""`;
+
+exports[`interpreter default scripts exit-during-path-resolve.src 1`] = `"\\"bye\\""`;
+
 exports[`interpreter default scripts exit-in-loop.src 1`] = `"\\"in loop\\""`;
+
+exports[`interpreter default scripts exit-in-loop.src 2`] = `"\\"test\\""`;
 
 exports[`interpreter default scripts extend-intrinsics.src 1`] = `"\\"was2\\""`;
 
@@ -235,6 +241,36 @@ exports[`interpreter default scripts if-shorthand.src 9`] = `"\\"was\\""`;
 exports[`interpreter default scripts if-shorthand.src 10`] = `"\\"foo\\""`;
 
 exports[`interpreter default scripts if-shorthand.src 11`] = `"null"`;
+
+exports[`interpreter default scripts implicit-properties.src 1`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 2`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 3`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 4`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 5`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 6`] = `"1"`;
+
+exports[`interpreter default scripts implicit-properties.src 7`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 8`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 9`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 10`] = `"1"`;
+
+exports[`interpreter default scripts implicit-properties.src 11`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 12`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 13`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 14`] = `"0"`;
+
+exports[`interpreter default scripts implicit-properties.src 15`] = `"0"`;
 
 exports[`interpreter default scripts imports.src 1`] = `"\\"file imported and sub file imported\\""`;
 
@@ -359,6 +395,22 @@ exports[`interpreter default scripts long-circular-import.src 2`] = `"\\"long ci
 exports[`interpreter default scripts long-circular-import.src 3`] = `"\\"long circular 1\\""`;
 
 exports[`interpreter default scripts long-circular-import.src 4`] = `"\\"start long circular\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 1`] = `"\\"test\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 2`] = `"\\"test\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 3`] = `"2"`;
+
+exports[`interpreter default scripts lookup-path-opt.src 4`] = `"{\\"x\\":\\"test\\"}"`;
+
+exports[`interpreter default scripts lookup-path-opt.src 5`] = `"\\"te\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 6`] = `"\\"xxx\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 7`] = `"\\"xx\\""`;
+
+exports[`interpreter default scripts lookup-path-opt.src 8`] = `"\\"xxx\\""`;
 
 exports[`interpreter default scripts loops.src 1`] = `"[\\"test0\\", 0, 0, 0]"`;
 
@@ -520,6 +572,16 @@ exports[`interpreter default scripts obj-init.src 1`] = `"[\\"123\\", \\"123\\",
 
 exports[`interpreter default scripts obj-init.src 2`] = `"[{\\"another\\":\\"123\\"}, \\"123\\", \\"foo\\"]"`;
 
+exports[`interpreter default scripts opt-shorthand.src 1`] = `"1"`;
+
+exports[`interpreter default scripts opt-shorthand.src 2`] = `"2"`;
+
+exports[`interpreter default scripts opt-shorthand.src 3`] = `"3"`;
+
+exports[`interpreter default scripts outer.src 1`] = `"{\\"IS_GREYBEL\\":1,\\"params\\":[],\\"foo\\":\\"bar\\"}"`;
+
+exports[`interpreter default scripts outer.src 2`] = `"1"`;
+
 exports[`interpreter default scripts override.src 1`] = `"\\"test\\""`;
 
 exports[`interpreter default scripts override.src 2`] = `"123"`;
@@ -558,9 +620,11 @@ exports[`interpreter default scripts scopes.src 1`] = `"\\"main local\\""`;
 
 exports[`interpreter default scripts scopes.src 2`] = `"\\"test fn local\\""`;
 
-exports[`interpreter default scripts scopes.src 3`] = `"\\"main local\\""`;
+exports[`interpreter default scripts scopes.src 3`] = `"\\"test bar local\\""`;
 
-exports[`interpreter default scripts scopes.src 4`] = `"\\"test bar local\\""`;
+exports[`interpreter default scripts scopes-in-anonymous-functions.src 1`] = `"\\"abc\\""`;
+
+exports[`interpreter default scripts scopes-in-anonymous-functions.src 2`] = `"\\"wa\\""`;
 
 exports[`interpreter default scripts self-ms-behaviour.src 1`] = `"{\\"bar\\":FUNCTION(actualValue, self, self)}"`;
 
@@ -596,6 +660,10 @@ exports[`interpreter default scripts slice.src 4`] = `"\\"bc\\""`;
 
 exports[`interpreter default scripts slice.src 5`] = `"\\"a\\""`;
 
+exports[`interpreter default scripts stringify-functions.src 1`] = `"FUNCTION(self, delimiter=\\",\\")"`;
+
+exports[`interpreter default scripts stringify-functions.src 2`] = `"FUNCTION(a, b=123, c=\\"abc\\")"`;
+
 exports[`interpreter default scripts super.src 1`] = `"\\"test\\""`;
 
 exports[`interpreter default scripts super.src 2`] = `"\\"doing math\\""`;
@@ -611,6 +679,16 @@ exports[`interpreter default scripts super.src 6`] = `"10"`;
 exports[`interpreter default scripts super.src 7`] = `"\\"test\\""`;
 
 exports[`interpreter default scripts super.src 8`] = `"{\\"__isa\\":{\\"__isa\\":{\\"__isa\\":{...},\\"test\\":FUNCTION()},\\"test\\":FUNCTION()},\\"lllbefore\\":\\"moo\\",\\"lll\\":\\"was\\"}"`;
+
+exports[`interpreter default scripts super.src 9`] = `"123"`;
+
+exports[`interpreter default scripts super.src 10`] = `"\\"\\"123\\"\\""`;
+
+exports[`interpreter default scripts super.src 11`] = `"123"`;
+
+exports[`interpreter default scripts super.src 12`] = `"\\"\\"123\\"\\""`;
+
+exports[`interpreter default scripts super.src 13`] = `"1"`;
 
 exports[`interpreter default scripts super-alt.src 1`] = `"42"`;
 
@@ -644,16 +722,8 @@ exports[`interpreter default scripts use-global-scope.src 1`] = `"\\"global\\""`
 
 exports[`interpreter default scripts use-local-scope.src 1`] = `"\\"local\\""`;
 
-exports[`interpreter should contain correct stack 1`] = `
-"at unknown:3:11
-at unknown:9:11
-at unknown:12:16"
+exports[`interpreter specific cases should contain correct stack 1`] = `
+"at unknown:3:15
+at unknown:9:15
+at unknown:12:20"
 `;
-
-exports[`interpreter should exit 1`] = `"\\"123\\""`;
-
-exports[`interpreter should exit 2`] = `"\\"456\\""`;
-
-exports[`interpreter should exit 3`] = `"\\"789\\""`;
-
-exports[`interpreter should exit 4`] = `"\\"foo\\""`;

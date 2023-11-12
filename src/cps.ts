@@ -1,17 +1,24 @@
 import {
   CPSContext,
   CPSVisitCallback,
-  defaultCPSVisit,
+  defaultCPSVisit as defaultGreybelCPSVisit,
   Noop,
   Operation,
-  PrepareError
+  PrepareError,
+  CPS as GreybelCPS
 } from 'greybel-interpreter';
+import {
+  ASTFeatureImportExpression,
+  ASTFeatureIncludeExpression,
+  ASTType as ASTTypeExtended
+} from 'greybel-core';
 import { ASTImportCodeExpression, ASTType } from 'greyscript-core';
 import { ASTBase, ASTRange } from 'miniscript-core';
 import { Include } from './operations/include';
+import { Import } from './operations/import';
 
-export const cpsVisit: CPSVisitCallback = async (
-  internalCPSVisit: CPSVisitCallback,
+export const defaultCPSVisit: CPSVisitCallback = async (
+  cpsVisit: CPSVisitCallback,
   context: CPSContext,
   stack: string[],
   item: ASTBase
@@ -46,7 +53,7 @@ export const cpsVisit: CPSVisitCallback = async (
       }
 
       try {
-        const subVisit = internalCPSVisit.bind(null, internalCPSVisit, context, [
+        const subVisit = cpsVisit.bind(null, cpsVisit, context, [
           ...stack,
           target
         ]);
@@ -73,8 +80,114 @@ export const cpsVisit: CPSVisitCallback = async (
         );
       }
     }
+    case ASTTypeExtended.FeatureImportExpression: {
+      const importExpr = item as ASTFeatureImportExpression;
+      const target = await context.handler.resourceHandler.getTargetRelativeTo(
+        currentTarget,
+        importExpr.path
+      );
+
+      if (stack.includes(target)) {
+        console.warn(
+          `Found circular dependency between "${currentTarget}" and "${target}" at line ${item.start.line}. Using noop instead to prevent overflow.`
+        );
+        return new Noop(item, target);
+      }
+
+      const code = await context.handler.resourceHandler.get(target);
+
+      if (code == null) {
+        const range = new ASTRange(item.start, item.end);
+
+        throw new PrepareError(`Cannot find import "${currentTarget}"`, {
+          target: currentTarget,
+          range
+        });
+      }
+
+      try {
+        const subVisit = cpsVisit.bind(null, cpsVisit, context, [...stack, target]);
+        const importStatement = await new Import(
+          importExpr,
+          currentTarget,
+          target,
+          code
+        ).build(subVisit);
+
+        return importStatement;
+      } catch (err: any) {
+        if (err instanceof PrepareError) {
+          throw err;
+        }
+
+        throw new PrepareError(
+          err.message,
+          {
+            target,
+            range: new ASTRange(item.start, item.end)
+          },
+          err
+        );
+      }
+    }
+    case ASTTypeExtended.FeatureIncludeExpression: {
+      const includeExpr = item as ASTFeatureIncludeExpression;
+      const target = await context.handler.resourceHandler.getTargetRelativeTo(
+        currentTarget,
+        includeExpr.path
+      );
+
+      if (stack.includes(target)) {
+        console.warn(
+          `Found circular dependency between "${currentTarget}" and "${target}" at line ${item.start.line}. Using noop instead to prevent overflow.`
+        );
+        return new Noop(item, target);
+      }
+
+      const code = await context.handler.resourceHandler.get(target);
+
+      if (code == null) {
+        const range = new ASTRange(item.start, item.end);
+
+        throw new PrepareError(`Cannot find include "${currentTarget}"`, {
+          target: currentTarget,
+          range
+        });
+      }
+
+      try {
+        const subVisit = cpsVisit.bind(null, cpsVisit, context, [...stack, target]);
+        const importStatement = await new Include(
+          includeExpr,
+          currentTarget,
+          target,
+          code
+        ).build(subVisit);
+
+        return importStatement;
+      } catch (err: any) {
+        if (err instanceof PrepareError) {
+          throw err;
+        }
+
+        throw new PrepareError(
+          err.message,
+          {
+            target,
+            range: new ASTRange(item.start, item.end)
+          },
+          err
+        );
+      }
+    }
     default: {
-      return defaultCPSVisit(internalCPSVisit, context, stack, item);
+      return defaultGreybelCPSVisit(cpsVisit, context, stack, item);
     }
   }
 };
+
+export class CPS extends GreybelCPS {
+  constructor(context: CPSContext, cpsVisit: CPSVisitCallback = defaultCPSVisit) {
+    super(context, cpsVisit);
+  }
+}

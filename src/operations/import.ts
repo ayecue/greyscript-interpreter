@@ -1,11 +1,11 @@
 import {
   CPSVisit,
-  Include as GreybelInclude,
+  Import as GreybelImport,
   Operation
 } from 'greybel-interpreter';
 import { Parser } from 'greyscript-core';
 
-export class Include extends GreybelInclude {
+export class Import extends GreybelImport {
   async build(visit: CPSVisit): Promise<Operation> {
     const parser = new Parser(this.code);
     this.chunk = parser.parseChunk();
