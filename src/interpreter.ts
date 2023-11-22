@@ -49,7 +49,7 @@ export class Interpreter extends GreybelInterpreter {
     return this;
   }
 
-  async run({ customCode }: InterpreterRunOptions = {}): Promise<Interpreter> {
+  async run({ customCode, vmOptions }: InterpreterRunOptions = {}): Promise<Interpreter> {
     const code =
       customCode ?? (await this.handler.resourceHandler.get(this.target));
     const bytecodeConverter = new BytecodeGenerator({
@@ -59,7 +59,7 @@ export class Interpreter extends GreybelInterpreter {
     });
     const bytecode = await bytecodeConverter.compile(code);
 
-    this.initVM(bytecode);
+    this.initVM(bytecode, vmOptions);
 
     await this.start();
     return this;
