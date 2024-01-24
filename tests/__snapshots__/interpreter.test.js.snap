@@ -174,7 +174,7 @@ exports[`interpreter default scripts extend-intrinsics.src 6`] = `"[\\"bar\\", \
 
 exports[`interpreter default scripts extend-intrinsics.src 7`] = `"[\\"bar\\", \\"moo\\", \\"another\\"]"`;
 
-exports[`interpreter default scripts gs-bug-index.src 1`] = `"\\"string\\""`;
+exports[`interpreter default scripts gs-bug-index.src 1`] = `"\\"function\\""`;
 
 exports[`interpreter default scripts gs-bug-index.src 2`] = `"\\"function\\""`;
 
