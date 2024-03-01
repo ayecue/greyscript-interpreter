@@ -262,17 +262,23 @@ exports[`interpreter default scripts implicit-properties.src 14`] = `"0"`;
 
 exports[`interpreter default scripts implicit-properties.src 15`] = `"0"`;
 
-exports[`interpreter default scripts imports.src 1`] = `"\\"file imported and sub file imported\\""`;
+exports[`interpreter default scripts imports.src 1`] = `"\\"import-file.src at line 3 (imported file)\\""`;
 
-exports[`interpreter default scripts imports.src 2`] = `"\\"foo included code and sub foo included code\\""`;
+exports[`interpreter default scripts imports.src 2`] = `"\\"file imported and sub file imported\\""`;
 
-exports[`interpreter default scripts imports.src 3`] = `"\\"foo imported code native and sub foo imported code native\\""`;
+exports[`interpreter default scripts imports.src 3`] = `"\\"foo included code and sub foo included code\\""`;
 
-exports[`interpreter default scripts imports-within-comments.src 1`] = `"\\"file imported and sub file imported\\""`;
+exports[`interpreter default scripts imports.src 4`] = `"\\"foo imported code native and sub foo imported code native\\""`;
 
-exports[`interpreter default scripts imports-within-comments.src 2`] = `"\\"foo included code and sub foo included code\\""`;
+exports[`interpreter default scripts imports.src 5`] = `"\\"imports.src at line 8 (main file)\\""`;
 
-exports[`interpreter default scripts imports-within-comments.src 3`] = `"\\"foo imported code native and sub foo imported code native\\""`;
+exports[`interpreter default scripts imports-within-comments.src 1`] = `"\\"import-file.src at line 3 (imported file)\\""`;
+
+exports[`interpreter default scripts imports-within-comments.src 2`] = `"\\"file imported and sub file imported\\""`;
+
+exports[`interpreter default scripts imports-within-comments.src 3`] = `"\\"foo included code and sub foo included code\\""`;
+
+exports[`interpreter default scripts imports-within-comments.src 4`] = `"\\"foo imported code native and sub foo imported code native\\""`;
 
 exports[`interpreter default scripts instances.src 1`] = `"\\"was\\""`;
 
