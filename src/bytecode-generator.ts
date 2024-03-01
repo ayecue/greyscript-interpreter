@@ -1,4 +1,5 @@
 import {
+  BytecodeConverterOptions,
   BytecodeGenerator as GreybelBytecodeGenerator,
   PrepareError
 } from 'greybel-interpreter';
@@ -6,6 +7,13 @@ import { ASTImportCodeExpression, ASTType, Parser } from 'greyscript-core';
 import { ASTBase, ASTRange } from 'miniscript-core';
 
 export class BytecodeGenerator extends GreybelBytecodeGenerator {
+  protected evaluatedImportCodes: Set<string>;
+
+  constructor(options: BytecodeConverterOptions) {
+    super(options);
+    this.evaluatedImportCodes = new Set();
+  }
+
   parse(code: string) {
     try {
       const parser = new Parser(code);
@@ -41,6 +49,10 @@ export class BytecodeGenerator extends GreybelBytecodeGenerator {
       node.directory
     );
 
+    if (this.evaluatedImportCodes.has(importTarget)) {
+      return;
+    }
+
     if (this.target.includes(importTarget)) {
       console.warn(
         `Found circular dependency between "${currentTarget}" and "${importTarget}" at line ${node.start.line}. Using noop instead to prevent overflow.`
@@ -51,11 +63,9 @@ export class BytecodeGenerator extends GreybelBytecodeGenerator {
     const code = await this.handler.resourceHandler.get(importTarget);
 
     if (code == null) {
-      const range = new ASTRange(node.start, node.end);
-
       throw new PrepareError(`Cannot find import "${currentTarget}"`, {
         target: currentTarget,
-        range
+        range: new ASTRange(node.start, node.end)
       });
     }
 
@@ -66,6 +76,7 @@ export class BytecodeGenerator extends GreybelBytecodeGenerator {
 
       await this.processNode(childNodes);
       this.target.pop();
+      this.evaluatedImportCodes.add(importTarget);
     } catch (err: any) {
       if (err instanceof PrepareError) {
         throw err;
