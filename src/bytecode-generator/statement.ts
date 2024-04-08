@@ -1,18 +1,15 @@
-
 import {
-  BytecodeStatementGenerator as GreybelBytecodeStatementGenerator, PrepareError
+  BytecodeStatementGenerator as GreybelBytecodeStatementGenerator,
+  PrepareError
 } from 'greybel-interpreter';
 import { ASTImportCodeExpression } from 'greyscript-core';
-import {
-  ASTBase,
-  ASTType,
-  ASTRange
-} from 'miniscript-core';
+import { ASTBase, ASTRange, ASTType } from 'miniscript-core';
+
 import { Context } from './context';
 
 export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerator {
   protected context: Context;
-  
+
   async process(node: ASTBase): Promise<void> {
     switch (node.type) {
       case ASTType.ImportCodeExpression:
@@ -25,10 +22,11 @@ export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerato
 
   protected async processImportCodeExpression(node: ASTImportCodeExpression) {
     const currentTarget = this.context.target.peek();
-    const importTarget = await this.context.handler.resourceHandler.getTargetRelativeTo(
-      currentTarget,
-      node.directory
-    );
+    const importTarget =
+      await this.context.handler.resourceHandler.getTargetRelativeTo(
+        currentTarget,
+        node.directory
+      );
 
     if (this.context.evaluatedImportCodes.has(importTarget)) {
       return;
