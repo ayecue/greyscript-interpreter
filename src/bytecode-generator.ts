@@ -45,10 +45,9 @@ export class BytecodeGenerator extends GreybelBytecodeGenerator {
 
     const mod = this.context.module.peek();
 
-    mod.pushCode({
-      op: OpCode.HALT,
-      source: mod.getSourceLocation(node)
-    });
+    this.context.pushCode({
+      op: OpCode.HALT
+    }, node);
 
     return {
       code: mod.getCode(),
