@@ -21,6 +21,10 @@ export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerato
   }
 
   protected async processImportCodeExpression(node: ASTImportCodeExpression) {
+    if (!node.eval) {
+      return;
+    }
+
     const currentTarget = this.context.target.peek();
     const importTarget =
       await this.context.handler.resourceHandler.getTargetRelativeTo(

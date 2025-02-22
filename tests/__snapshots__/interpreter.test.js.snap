@@ -272,7 +272,7 @@ exports[`interpreter default scripts imports.src 3`] = `"\\"foo included code an
 
 exports[`interpreter default scripts imports.src 4`] = `"\\"foo imported code native and sub foo imported code native\\""`;
 
-exports[`interpreter default scripts imports.src 5`] = `"\\"imports.src at line 8 (main file)\\""`;
+exports[`interpreter default scripts imports.src 5`] = `"\\"imports.src at line 9 (main file)\\""`;
 
 exports[`interpreter default scripts imports-within-comments.src 1`] = `"\\"import-file.src at line 3 (imported file)\\""`;
 

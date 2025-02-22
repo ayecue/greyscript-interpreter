@@ -1,6 +1,7 @@
-#import fooImport from ../fixtures/import-file.src;
-#include ../fixtures/include-file.src;
+#import fooImport from "../fixtures/import-file.src";
+#include "../fixtures/include-file.src";
 import_code("../fixtures/native-import")
+import_code("./ignore-me") // no-eval;
 
 print(fooImport)
 print(includeFileFoo)
