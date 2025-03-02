@@ -1,6 +1,6 @@
 {
   "name": "greyscript-interpreter",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Interpreter",
   "main": "dist/index",
   "typings": "dist/index",
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "greyscript-core": "~2.5.5",
-    "greybel-interpreter": "~5.5.2"
+    "greybel-interpreter": "~5.5.3"
   },
   "keywords": [
     "greyscript",
