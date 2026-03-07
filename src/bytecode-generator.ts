@@ -11,7 +11,10 @@ import { BytecodeStatementGenerator } from './bytecode-generator/statement';
 
 const parse = function(this: BytecodeGenerator, code: string) {
   try {
-    const parser = new Parser(code);
+    const parser = new Parser(code, {
+      environmentVariables: this.environmentVariables,
+      strictMode: this.strictMode
+    });
     return parser.parseChunk();
   } catch (err: any) {
     if (err instanceof PrepareError) {

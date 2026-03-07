@@ -38,7 +38,7 @@ export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerato
 
     if (this.context.target.includes(importTarget)) {
       console.warn(
-        `Found circular dependency between "${currentTarget}" and "${importTarget}" at line ${node.start.line}. Using noop instead to prevent overflow.`
+        `Found circular dependency between "${currentTarget}" and "${importTarget}" at line ${node.startLine}. Using noop instead to prevent overflow.`
       );
       return;
     }
@@ -48,7 +48,10 @@ export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerato
     if (code == null) {
       throw new PrepareError(`Cannot find import "${currentTarget}"`, {
         target: currentTarget,
-        range: new ASTRange(node.start, node.end)
+        range: new ASTRange(
+          [node.startLine, node.startChar],
+          [node.endLine, node.endChar]
+        )
       });
     }
 
@@ -69,7 +72,10 @@ export class BytecodeStatementGenerator extends GreybelBytecodeStatementGenerato
         err.message,
         {
           target: importTarget,
-          range: new ASTRange(node.start, node.end)
+          range: new ASTRange(
+            [node.startLine, node.startChar],
+            [node.endLine, node.endChar]
+          )
         },
         err
       );
