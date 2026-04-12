@@ -13,14 +13,19 @@ import { BytecodeGenerator } from './bytecode-generator';
 
 export class Interpreter extends GreybelInterpreter {
   parse(code: string) {
-    const parser = new Parser(code);
+    const parser = new Parser(code, {
+      environmentVariables: this.environmentVariables,
+      strictMode: this.strictMode
+    });
     return parser.parseChunk();
   }
 
   async inject(code: string, context?: OperationContext): Promise<Interpreter> {
     const bytecodeGenerator = new BytecodeGenerator({
       target: 'injected',
-      handler: this.handler
+      handler: this.handler,
+      environmentVariables: this.environmentVariables,
+      strictMode: this.strictMode
     });
     const result = await bytecodeGenerator.compile(code);
     const vm = new VM({
@@ -55,7 +60,9 @@ export class Interpreter extends GreybelInterpreter {
     const bytecodeConverter = new BytecodeGenerator({
       target: this.target,
       handler: this.handler,
-      debugMode: this.debugMode
+      debugMode: this.debugMode,
+      environmentVariables: this.environmentVariables,
+      strictMode: this.strictMode
     });
     const bytecode = await bytecodeConverter.compile(code);
 
